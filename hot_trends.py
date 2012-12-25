@@ -25,11 +25,11 @@ trends = GoogleHotTrends()
 keywords = trends.fetch_trends()
 print keywords
 
-consumer_key= "wPS9eunNZY2x49O16bZcg"
-consumer_secret = "7rR7ckljLpwxoNPCrVf174SNZL7IXE4rhTUxLqNpY"
+consumer_key= ""
+consumer_secret = ""
 
-access_token = "15640755-d9nI62E67Pr4UyNOdwfvNqsTsOBGLM9wkgrE6t5mH"
-access_token_secret = "8OYioeKAXoAd4rfVfsowEvxWjbCXu1SgHra2AruqE"
+access_token = ""
+access_token_secret = ""
 
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
