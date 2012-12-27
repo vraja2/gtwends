@@ -3,6 +3,8 @@ import cStringIO
 import re 
 import tweepy 
 import configuration 
+import json
+import requests
 
 class GoogleHotTrends:
 	
@@ -38,12 +40,17 @@ access_token_secret = configuration.access_token_secret
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
+jsonURL= 'http://www.sentiment140.com/api/bulkClassifyJson'
 
 api = tweepy.API(auth)
 print api.me().name
 for y in xrange(0,len(keywords)):
 	print("------------------------------")
-	print keywords[y]
+	print keywords[y]    #iterate through trend topics
 	result = api.search(keywords[y])
-	for x in xrange(0,len(result)):
+	for x in xrange(0,len(result)):   #iterate through trend related tweets
 		print result[x].text
+		d = {'data': [{'text': result[x].text}]}
+		r = requests.post(jsonURL, data = json.dumps(d))
+		print r.text
+
