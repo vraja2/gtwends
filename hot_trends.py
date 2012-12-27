@@ -43,21 +43,24 @@ auth.set_access_token(access_token, access_token_secret)
 
 jsonURL= 'http://www.sentiment140.com/api/bulkClassifyJson'
 
+
 api = tweepy.API(auth)
 print api.me().name
 for y in xrange(0,len(keywords)):
+	total = 0
 	print("------------------------------")
-	print keywords[y]    #iterate through trend topics
+	print Fore.WHITE + keywords[y]    #iterate through trend topics
 	result = api.search(keywords[y])
 	for x in xrange(0,len(result)):   #iterate through trend related tweets
 		d = {'data': [{'text': result[x].text}]}
 		r = requests.post(jsonURL, data = json.dumps(d))
 		jsonContent = json.loads(r.text)
 		polVal = jsonContent["data"][0]["polarity"]
+		total+=polVal
 		if polVal == 0:
 			print Fore.RED + result[x].text
 		elif polVal == 4:
 			print Fore.GREEN + result[x].text
 		elif polVal == 2:
 			print Fore.WHITE + result[x].text
-
+	print total/len(result)
