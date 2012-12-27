@@ -26,6 +26,8 @@ trends = GoogleHotTrends()
 keywords = trends.fetch_trends()
 print keywords
 
+# configuration file not included on github. make a configuration.py file.
+
 consumer_key= configuration.consumer_key
 consumer_secret = configuration.consumer_secret
 
