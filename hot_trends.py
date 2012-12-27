@@ -5,6 +5,7 @@ import tweepy
 import configuration 
 import json
 import requests
+from colorama import Fore, Back, Style
 
 class GoogleHotTrends:
 	
@@ -49,8 +50,14 @@ for y in xrange(0,len(keywords)):
 	print keywords[y]    #iterate through trend topics
 	result = api.search(keywords[y])
 	for x in xrange(0,len(result)):   #iterate through trend related tweets
-		print result[x].text
 		d = {'data': [{'text': result[x].text}]}
 		r = requests.post(jsonURL, data = json.dumps(d))
-		print r.text
+		jsonContent = json.loads(r.text)
+		polVal = jsonContent["data"][0]["polarity"]
+		if polVal == 0:
+			print Fore.RED + result[x].text
+		elif polVal == 4:
+			print Fore.GREEN + result[x].text
+		elif polVal == 2:
+			print Fore.WHITE + result[x].text
 
