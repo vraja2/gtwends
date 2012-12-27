@@ -2,6 +2,7 @@ import pycurl
 import cStringIO
 import re 
 import tweepy 
+import configuration 
 
 class GoogleHotTrends:
 	
@@ -25,11 +26,11 @@ trends = GoogleHotTrends()
 keywords = trends.fetch_trends()
 print keywords
 
-consumer_key= ""
-consumer_secret = ""
+consumer_key= configuration.consumer_key
+consumer_secret = configuration.consumer_secret
 
-access_token = ""
-access_token_secret = ""
+access_token = configuration.access_token
+access_token_secret = configuration.access_token_secret
 
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
