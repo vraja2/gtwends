@@ -51,16 +51,23 @@ for y in xrange(0,len(keywords)):
 	print("------------------------------")
 	print Fore.WHITE + keywords[y]    #iterate through trend topics
 	result = api.search(keywords[y])
+	counter = 0
 	for x in xrange(0,len(result)):   #iterate through trend related tweets
 		d = {'data': [{'text': result[x].text}]}
 		r = requests.post(jsonURL, data = json.dumps(d))
 		jsonContent = json.loads(r.text)
 		polVal = jsonContent["data"][0]["polarity"]
-		total+=polVal
 		if polVal == 0:
 			print Fore.RED + result[x].text
+			total+=polVal
+			counter+=1
 		elif polVal == 4:
 			print Fore.GREEN + result[x].text
+			total+=polVal
+			counter+=1
 		elif polVal == 2:
 			print Fore.WHITE + result[x].text
-	print total/len(result)
+	if counter != 0:
+		print Fore.WHITE + str(total/counter)
+	else:
+		print Fore.WHITE + str(2)
